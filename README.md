@@ -9,6 +9,9 @@ This is an example of how to list things you need to use the software and how to
 * npm
   ```sh
   npm install
+* Bearer
+  ```bash
+  create a new Bearer using some online tool and paste it into the .env file
 
 ## API Endpoints:
 
