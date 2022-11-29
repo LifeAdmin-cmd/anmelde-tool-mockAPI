@@ -17,5 +17,6 @@ This is an example of how to list things you need to use the software and how to
 
 ### /test
       returns planet data sourced from swapi
+      method: GET
       requires:
         Authorization: Bearer
