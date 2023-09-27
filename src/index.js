@@ -190,8 +190,7 @@ app.get('/api/event/:id', (req, res) => {
       return res.status(500).send('Error retrieving event: ' + err.message);
     }
 
-    const jsonResponse = fahrtenJson;
-    console.log(jsonResponse);
+    const jsonResponse = JSON.parse(JSON.stringify(fahrtenJson));
 
     // 2. If the event does not exist, just respond with the JSON as is
     if (!row) {
