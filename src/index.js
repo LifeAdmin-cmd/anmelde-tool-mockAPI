@@ -199,7 +199,7 @@ app.get('/api/event/:id', (req, res) => {
     }
 
     // 3. If the event exists in the db, modify the JSON data for the object with the id "55b24e63-4e8f-4a56-8be5-52e7c7991a25"
-    const targetEvent = jsonResponse.find(event => event.id === "55b24e63-4e8f-4a56-8be5-52e7c7991a25");
+    const targetEvent = jsonResponse.find(event => event.id === "cac3b5ba-bdfd-49d8-8557-7cadb4b5f8d4");
     if (targetEvent) {
         targetEvent.existingRegister = true;
     }
