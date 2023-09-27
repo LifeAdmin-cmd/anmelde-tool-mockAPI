@@ -1,0 +1,66 @@
+[
+  {
+    "title": "Datenschutz",
+    "introText": "Am Ende bekommst du eine Bestätigungs-Email. Nur mit dieser E-Mail ist deine Anmeldung erfolgreich abgeschlossen.",
+    "formFields": [
+      {
+        "type": "booleanAttribute",
+        "id": "datenschutz",
+        "label": "Ich stimme zu meine Daten bis zum Ende der Fahrt zu speichern.",
+        "required": true
+      },
+      {
+        "type": "conditionsAttribute",
+        "id": "fahrtenConditions",
+        "label": "Ich habe die Fahrtenbedinungen gelesen und stimme ihnen hiermit zu.",
+        "linkUrl": "stammgalaxias.de/fahrtenbedinungen",
+        "introText": "Die Fahrtenbedingungen können über das klicken auf den blauen Schriftzug abgerufen werden.",
+        "required": true
+      }
+    ]
+  },
+  {
+    "title": "Personen",
+    "introText": "",
+    "formFields": []
+  },
+  {
+    "title": "Anreise",
+    "introText": "Wir möchten gerne wissen wann, wo und wie du ankommst.",
+    "formFields": [
+      {
+        "type": "travelAttribute",
+        "id": "testAnreise",
+        "label": "Anreise",
+        "required": true
+      }
+    ]
+  },
+  {
+    "title": "Zusätzliche Bemerkung",
+    "introText": " Möchstest du der Lagerleitung noch etwas mitgeben? ",
+    "formFields": [
+      {
+        "type": "textAttribute",
+        "id": "additionalNotice",
+        "label": "Zusätzliche Nachricht",
+        "required": false
+      }
+    ]
+  },
+  {
+    "title": "Zusammenfassung",
+    "introText": "",
+    "formFields": [
+      {
+        "type": "summaryAttribute"
+      },
+      {
+        "type": "booleanAttribute",
+        "id": "verbindlicheAnmeldung",
+        "label": "Die oben stehenden Daten sind korrekt und möchte ich die genannten Personen verbindlich zu dieser Fahrt anmelden.",
+        "required": true
+      }
+    ]
+  }
+]
