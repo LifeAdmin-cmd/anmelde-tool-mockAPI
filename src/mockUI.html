@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Mock API</title>
+    <link href="/node_modules/jsoneditor/dist/jsoneditor.css" rel="stylesheet" type="text/css">
+    <script src="/node_modules/jsoneditor/dist/jsoneditor.js"></script>
+</head>
+<body>
+    <h1>Mock API Creator</h1>
+    
+    <form id="mockForm">
+        Route: <input type="text" id="route" required><br><br>
+        Method: <select id="method">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+        </select><br><br>
+        Status: <input type="number" id="status" value="200" required><br><br>
+        
+        Response:<br>
+        <div id="jsoneditor" style="width: 400px; height: 400px;"></div><br>
+        
+        <button type="button" onclick="addMock()">Add Mock</button>
+    </form>
+
+    <h2>Existing Mocks:</h2>
+    <div id="mocksList"></div>
+
+    <script>
+        let editor;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const container = document.getElementById("jsoneditor");
+            const options = {};
+            editor = new JSONEditor(container, options);
+
+            // Set the JSON data you want to load initially (if any)
+            editor.set({});
+        });
+
+        function addMock() {
+            let route = document.getElementById('route').value;
+            let method = document.getElementById('method').value;
+            let status = document.getElementById('status').value;
+            let response = editor.get();
+
+            fetch('/api/add-mock', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    route: route,
+                    method: method,
+                    status: status,
+                    response: response
+                })
+            }).then(() => {
+                loadMocks();
+                alert('Mock added successfully!');
+            });
+        }
+
+        function loadMocks() {
+            function loadMocks() {
+                fetch('/api/get-mocks').then(response => response.json()).then(mocks => {
+                    let mocksDiv = document.getElementById('mocksList');
+                    mocksDiv.innerHTML = ''; // Clear existing mocks
+                    
+                    mocks.forEach(mock => {
+                        let mockDiv = document.createElement('div');
+                        
+                        let routeElem = document.createElement('span');
+                        routeElem.textContent = `${mock.method} ${mock.route} -> ${mock.status}`;
+                        
+                        let editButton = document.createElement('button');
+                        editButton.textContent = 'Edit';
+                        editButton.onclick = () => editMock(mock.id);
+                        
+                        let deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.onclick = () => deleteMock(mock.id);
+
+                        mockDiv.appendChild(routeElem);
+                        mockDiv.appendChild(editButton);
+                        mockDiv.appendChild(deleteButton);
+                        
+                        mocksDiv.appendChild(mockDiv);
+                    });
+                });
+            }
+        }
+
+        loadMocks();
+    </script>
+</body>
+</html>
